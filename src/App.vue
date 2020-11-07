@@ -1,13 +1,15 @@
 <template>
   <main id="app">
-    Welcome to Twitter Helpdesk
+    <Login />
   </main>
 </template>
 
 <script>
+import Login from "./pages/Login";
+
 export default {
   name: "App",
-  components: {},
+  components: { Login },
 };
 </script>
 
