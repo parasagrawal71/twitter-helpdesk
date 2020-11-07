@@ -16,7 +16,10 @@
             <ParentTweet v-for="item in [0, 1, 2, 3]" :key="item" />
           </section>
         </section>
-        <section class="tweets--right"></section>
+        <section class="tweets--right">
+          <ChildTweets />
+          <Profile />
+        </section>
       </section>
     </section>
   </main>
@@ -27,10 +30,12 @@ import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import SubHeader from "../components/SubHeader";
 import ParentTweet from "../components/ParentTweet";
+import ChildTweets from "../components/ChildTweets";
+import Profile from "../components/Profile";
 
 export default {
   name: "Conversations",
-  components: { Sidebar, Header, SubHeader, ParentTweet },
+  components: { Sidebar, Header, SubHeader, ParentTweet, ChildTweets, Profile },
 };
 </script>
 
@@ -49,9 +54,16 @@ export default {
 }
 .tweets {
   padding-top: 40px;
-  width: 21%;
+  width: 100%;
+  @include flex-row;
 }
 .tweets--left {
+  width: 21%;
+  overflow-y: scroll;
+  max-height: 74vh;
+}
+.tweets--left::-webkit-scrollbar {
+  display: none;
 }
 .tweets-latest {
 }
@@ -67,5 +79,12 @@ export default {
 .tweets-expired-header span {
   background: #fff;
   padding: 0 10px;
+}
+.tweets--right {
+  width: 79%;
+  margin-left: 30px;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+  @include flex-row-sb;
 }
 </style>

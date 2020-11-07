@@ -34,7 +34,7 @@ export default {
 .tweetbox {
   border: 1px solid lightgrey;
   border-radius: 4px;
-  width: 255px;
+  // width: 255px;
   max-height: 60px;
   @include flex-row;
   padding: 15px 10px;
