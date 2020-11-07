@@ -4,6 +4,20 @@
     <section class="conversations--right">
       <Header />
       <SubHeader />
+      <section class="tweets">
+        <section class="tweets--left">
+          <section class="tweets-latest">
+            <ParentTweet v-for="item in [0, 1, 2]" :key="item" />
+          </section>
+          <section class="tweets-expired">
+            <div class="tweets-expired-header">
+              <span>Expired chats</span>
+            </div>
+            <ParentTweet v-for="item in [0, 1, 2, 3]" :key="item" />
+          </section>
+        </section>
+        <section class="tweets--right"></section>
+      </section>
     </section>
   </main>
 </template>
@@ -12,10 +26,11 @@
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import SubHeader from "../components/SubHeader";
+import ParentTweet from "../components/ParentTweet";
 
 export default {
   name: "Conversations",
-  components: { Sidebar, Header, SubHeader },
+  components: { Sidebar, Header, SubHeader, ParentTweet },
 };
 </script>
 
@@ -31,5 +46,26 @@ export default {
 .conversations--right {
   width: 95%;
   padding: 20px 80px;
+}
+.tweets {
+  padding-top: 40px;
+  width: 21%;
+}
+.tweets--left {
+}
+.tweets-latest {
+}
+.tweets-expired {
+}
+.tweets-expired-header {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #e6e6e6;
+  line-height: 0.1em;
+  margin: 20px 0 20px;
+}
+.tweets-expired-header span {
+  background: #fff;
+  padding: 0 10px;
 }
 </style>
