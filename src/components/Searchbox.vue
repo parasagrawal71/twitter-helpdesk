@@ -30,6 +30,6 @@ export default {
   outline: none;
   border: 1px solid #d5d5d5;
   border-radius: 15px;
-  padding: 5px 0 5px 35px;
+  padding: 5px 0 5px 40px;
 }
 </style>
