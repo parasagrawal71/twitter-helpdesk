@@ -29,6 +29,12 @@
   justify-content: flex-end;
 }
 
+@mixin flex-row-se {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 /* *** FLEX ROW VERTICAL STLYES *** */
 @mixin flex-row-v-cen {
   display: flex;

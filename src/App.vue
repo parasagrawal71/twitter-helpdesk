@@ -1,20 +1,22 @@
 <template>
   <main id="app">
-    <Login />
+    <!-- <Login /> -->
+    <Conversations />
   </main>
 </template>
 
 <script>
-import Login from "./pages/Login";
+// import Login from "./pages/Login";
+import Conversations from "./pages/Conversations";
 
 export default {
   name: "App",
-  components: { Login },
+  components: { Conversations },
 };
 </script>
 
 <style>
-#app {
+body {
   margin: 0;
   box-sizing: border-box;
 }
