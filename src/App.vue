@@ -1,17 +1,13 @@
 <template>
-  <main id="app">
-    <!-- <Login /> -->
-    <Conversations />
-  </main>
+  <div id="app">
+    <router-view />
+  </div>
 </template>
 
 <script>
-// import Login from "./pages/Login";
-import Conversations from "./pages/Conversations";
-
 export default {
   name: "App",
-  components: { Conversations },
+  components: {},
 };
 </script>
 

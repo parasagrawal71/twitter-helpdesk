@@ -1,11 +1,12 @@
 <template>
   <main>
-    <button @click="requestTwitterToken">Login</button>
+    <button @click="routeToConv">Login</button>
   </main>
 </template>
 
 <script>
 import axios from "axios";
+import router from "../router";
 
 export default {
   name: "Login",
@@ -21,6 +22,10 @@ export default {
         })
         .then((response) => console.log("response: ", response))
         .catch((e) => console.log("Error: ", e));
+    },
+
+    routeToConv() {
+      router.push({ name: "Conversations" });
     },
   },
 };
