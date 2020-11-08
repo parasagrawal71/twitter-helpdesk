@@ -40,6 +40,11 @@ import { setCookie } from "../utils/cookie";
 
 export default {
   name: "Login",
+  data() {
+    return {
+      HOST_URL: "http://localhost:5000", //"https://twitter-helpdesk--server.herokuapp.com",
+    };
+  },
   mounted() {
     this.requestAccessToken();
   },
@@ -51,8 +56,7 @@ export default {
     requestTwitterToken() {
       const config = {
         method: "get",
-        url:
-          "https://twitter-helpdesk--server.herokuapp.com/api/v1/auth/request_token",
+        url: `${this.HOST_URL}/api/v1/auth/request_token`,
       };
       return axios(config)
         .then((response) => {
@@ -90,8 +94,7 @@ export default {
 
       await axios({
         method: "post",
-        url:
-          "https://twitter-helpdesk--server.herokuapp.com/api/v1/auth/access_token",
+        url: `${this.HOST_URL}/api/v1/auth/access_token`,
         data: {
           oauth_token,
           oauth_verifier,

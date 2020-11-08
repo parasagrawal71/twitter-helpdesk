@@ -50,7 +50,7 @@ export default {
 }
 .conversations--right {
   width: 95%;
-  padding: 20px 80px;
+  padding: 10px 80px;
 }
 .tweets {
   padding-top: 40px;
