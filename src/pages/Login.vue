@@ -1,6 +1,35 @@
 <template>
-  <main>
-    <button @click="requestTwitterToken">Login</button>
+  <main class="login">
+    <header class="login-header">Twitter Helpdesk</header>
+
+    <section class="login-content">
+      <section class="login-content-box">
+        <div class="login-content-box-header">
+          Already have a Twitter Account?
+        </div>
+        <button @click="requestTwitterToken" class="twitter-btn">
+          <img
+            src="../assets/img/twitter-logo.png"
+            alt="twitter-logo"
+            class="twitter-logo"
+          />
+          <div class="twitter-btn-text">Sign in with Twitter</div>
+        </button>
+      </section>
+      <section class="login-content-box">
+        <div class="login-content-box-header">
+          Create a Twitter Account
+        </div>
+        <button @click="registerOnTwitter" class="twitter-btn">
+          <img
+            src="../assets/img/twitter-logo.png"
+            alt="twitter-logo"
+            class="twitter-logo"
+          />
+          <div class="twitter-btn-text">Create Account</div>
+        </button>
+      </section>
+    </section>
   </main>
 </template>
 
@@ -15,6 +44,10 @@ export default {
     this.requestAccessToken();
   },
   methods: {
+    registerOnTwitter() {
+      window.open("https://twitter.com/");
+    },
+
     requestTwitterToken() {
       const config = {
         method: "get",
@@ -91,4 +124,51 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "../utils/commonStyles/flex.scss";
+
+.login {
+  background: #f7f7f7;
+  height: 100vh;
+}
+.login-header {
+  padding: 30px 50px;
+  font-size: 20px;
+  // font-weight: bold;
+  font-family: Poppins-Medium;
+}
+.login-content {
+  @include flex-row-b-cen;
+  height: calc(100vh - 300px);
+}
+.login-content-box {
+  @include flex-col-h-cen;
+  background: #eaeaea;
+  border-radius: 4px;
+  padding: 50px;
+  height: 20vh;
+  min-width: 250px;
+}
+.login-content-box:last-child {
+  margin-left: 100px;
+}
+.login-content-box-header {
+}
+.twitter-btn {
+  @include flex-row-v-cen;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  outline: none;
+  margin-top: 50px;
+}
+.twitter-btn:hover {
+  cursor: pointer;
+}
+.twitter-logo {
+  width: 22px;
+  height: 22px;
+}
+.twitter-btn-text {
+  font-family: Poppins-Medium;
+}
+</style>
