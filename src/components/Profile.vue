@@ -46,7 +46,7 @@ export default {
 
 .profile-details {
   @include flex-col-h-cen;
-  width: 250px;
+  width: 350px;
   border-left: 1px solid #dbdbdb;
 }
 

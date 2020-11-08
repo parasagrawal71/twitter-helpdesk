@@ -12,12 +12,31 @@
       <div class="childtweets-header-time">Oct 1 - Oct 12</div>
       <div class="childtweets-header-create">Create a task</div>
     </section>
+    <section class="childtweets-body">
+      <div class="childtweets-body-header">Today</div>
+      <ChildTweetMsg />
+      <div class="childtweets-body-assigned">
+        <img
+          src="../assets/img/circular.png"
+          alt="assitant"
+          class="profile-pic"
+        />
+        <div class="childtweets-body-assigned-text">
+          <span>Paras Agrawal</span> (you) assigned to this conversations
+        </div>
+      </div>
+    </section>
+    <div class="childtweets-body-reply"><Reply /></div>
   </main>
 </template>
 
 <script>
+import ChildTweetMsg from "./ChildTweetMsg";
+import Reply from "./Reply";
+
 export default {
   name: "ChildTweets",
+  components: { ChildTweetMsg, Reply },
 };
 </script>
 
@@ -26,6 +45,7 @@ export default {
 
 .childtweets {
   width: 100%;
+  position: relative;
 }
 .childtweets-header {
   @include flex-row-v-cen;
@@ -60,5 +80,34 @@ export default {
   background: #f7f6f3;
   padding: 5px 15px;
   border-radius: 10px;
+}
+.childtweets-body {
+  padding: 10px;
+}
+.childtweets-body-header {
+  padding: 15px 40px;
+  color: #9d9d9d;
+}
+.childtweets-body-assigned {
+  @include flex-row-v-cen;
+  padding: 5px 10px;
+}
+.childtweets-body-assigned-text {
+  padding-left: 10px;
+  color: grey;
+}
+.childtweets-body-assigned-text span {
+  color: #bd0f0f;
+}
+.profile-pic {
+  max-width: 20px;
+  height: auto;
+  border-radius: 50%;
+}
+.childtweets-body-reply {
+  padding-left: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 90%;
 }
 </style>
