@@ -60,6 +60,7 @@ export default {
           //   "response",
           //   response && response.data && response.data.data
           // );
+
           if (response && response.data && response.data.data) {
             const oauthToken = response.data.data.split("&")[0].split("=")[1];
             window.open(

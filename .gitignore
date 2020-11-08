@@ -13,6 +13,7 @@ yarn-debug.log*
 yarn-error.log*
 yarn.lock
 pnpm-debug.log*
+package-lock.json
 
 # Editor directories and files
 .idea
@@ -22,3 +23,8 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+
+.firebase
+firebase-debug.log
+.github
