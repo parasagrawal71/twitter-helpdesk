@@ -7,59 +7,85 @@
 <script>
 import axios from "axios";
 import router from "../router";
+import { setCookie } from "../utils/cookie";
 
 export default {
   name: "Login",
+  mounted() {
+    this.requestAccessToken();
+  },
   methods: {
     requestTwitterToken() {
-      // axios
-      //   .request({
-      //     method: "POST",
-      //     url: "https://api.twitter.com/oauth/request_token",
-      //     Authorization: `OAuth oauth_nonce="K7ny27JTpKVsTgdyLeDfmQQWVLELj2zAK5BslRsqyw", oauth_callback="${encodeURIComponent(
-      //       "http://127.0.0.1:3000"
-      //     )}", oauth_signature_method="HMAC-SHA1", oauth_timestamp="${Math.floor(
-      //       new Date().getTime() / 1000
-      //     )}", oauth_consumer_key="ywkvzrkLoWlJBDu1yYvBOgywg", oauth_signature="IPkHRKPkxx35K5Xgjf5173oHdJRaUyjZEf1xAocmPVhRsvwBNA", oauth_version="1.0"`,
-      //   })
-      //   .then((response) => console.log("response: ", response))
-      //   .catch((e) => console.log("Error: ", e));
-
-      // const config = {
-      //   method: "post",
-      //   url: "https://api.twitter.com/oauth/request_token",
-      //   headers: {
-      //     Authorization: `OAuth oauth_consumer_key="ywkvzrkLoWlJBDu1yYvBOgywg",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1604841931",oauth_nonce="K7ny27JTpKVsTgdyLeDfmQQWVLELj2zAK5BslRsqyw",oauth_version="1.0",oauth_callback="${encodeURIComponent(
-      //       window.location.origin
-      //     )}",oauth_signature="jV1z4bGB4y1GOXLkTcKossodT8A%3D"`,
-      //   },
-      // };
-
-      // axios(config)
-      //   .then(function(response) {
-      //     console.log(JSON.stringify(response.data));
-      //   })
-      //   .catch(function(error) {
-      //     console.log(error);
-      //   });
-
       const config = {
         method: "get",
         url:
           "https://twitter-helpdesk--server.herokuapp.com/api/v1/auth/request_token",
       };
-
-      axios(config)
+      return axios(config)
         .then((response) => {
-          console.log("response", response);
+          // console.log(
+          //   "response",
+          //   response && response.data && response.data.data
+          // );
+          if (response && response.data && response.data.data) {
+            const oauthToken = response.data.data.split("&")[0].split("=")[1];
+            window.open(
+              `https://api.twitter.com/oauth/authenticate?oauth_token=${oauthToken}`,
+              "_self"
+            );
+          }
         })
         .catch((error) => {
-          console.log("Error: ", error);
+          // console.log("Error: ", error);
+          return error;
         });
     },
 
-    routeToConv() {
-      router.push({ name: "Conversations" });
+    async requestAccessToken() {
+      const search = window.location.search;
+      const oauthTokenStr =
+        search && search.substr(1, search.length).split("&")[0];
+      const oauthVerifierStr =
+        search && search.substr(1, search.length).split("&")[1];
+
+      if (!oauthTokenStr || !oauthVerifierStr) {
+        return;
+      }
+      const oauth_token = oauthTokenStr.split("=")[1];
+      const oauth_verifier = oauthVerifierStr.split("=")[1];
+
+      await axios({
+        method: "post",
+        url:
+          "https://twitter-helpdesk--server.herokuapp.com/api/v1/auth/access_token",
+        data: {
+          oauth_token,
+          oauth_verifier,
+        },
+      })
+        .then((response) => {
+          // console.log(
+          //   "response",
+          //   response && response.data && response.data.data
+          // );
+          const { data } = response && response.data;
+          const tempArr = data && data.split("&");
+          const dataArray = tempArr.map((item) => item && item.split("=")[1]);
+          const userData = {
+            oauth_token: dataArray[0],
+            oauth_token_secret: dataArray[1],
+            user_id: dataArray[2],
+            screen_name: dataArray[3],
+          };
+          setCookie("userData", JSON.stringify(userData));
+          router.push({ name: "Conversations" });
+          // window.location.replace("/");
+        })
+        .catch((error) => {
+          // console.log("Error: ", error);
+          window.location.replace("/");
+          return error;
+        });
     },
   },
 };
