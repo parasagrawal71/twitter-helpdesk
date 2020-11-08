@@ -1,6 +1,6 @@
 <template>
   <main>
-    <button @click="routeToConv">Login</button>
+    <button @click="requestTwitterToken">Login</button>
   </main>
 </template>
 
@@ -16,9 +16,11 @@ export default {
         .request({
           method: "POST",
           url: "https://api.twitter.com/oauth/request_token",
-          Authorization: `OAuth oauth_nonce="K7ny27JTpKVsTgdyLeDfmQQWVLELj2zAK5BslRsqyw", oauth_callback="http%3A%2F%2Flocalhost%3A3000%2F", oauth_signature_method="HMAC-SHA1", oauth_timestamp="${Math.floor(
+          Authorization: `OAuth oauth_nonce="K7ny27JTpKVsTgdyLeDfmQQWVLELj2zAK5BslRsqyw", oauth_callback="${encodeURIComponent(
+            "http://localhost:3000"
+          )}", oauth_signature_method="HMAC-SHA1", oauth_timestamp="${Math.floor(
             new Date().getTime() / 1000
-          )}", oauth_consumer_key="JAABlOt9wzw9dyr8SASkPjRrj", oauth_signature="ki0m1aFKtdYisdalDQUOHnfOS0EI5XC1Iez1xbhx0Htox2NwrI", oauth_version="1.0"`,
+          )}", oauth_consumer_key="ywkvzrkLoWlJBDu1yYvBOgywg", oauth_signature="IPkHRKPkxx35K5Xgjf5173oHdJRaUyjZEf1xAocmPVhRsvwBNA", oauth_version="1.0"`,
         })
         .then((response) => console.log("response: ", response))
         .catch((e) => console.log("Error: ", e));
