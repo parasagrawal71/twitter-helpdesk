@@ -32,12 +32,17 @@
         <div>102</div>
       </div>
     </section>
+
+    <Tasks />
   </section>
 </template>
 
 <script>
+import Tasks from "./Tasks";
+
 export default {
   name: "Profile",
+  components: { Tasks },
 };
 </script>
 
@@ -46,8 +51,10 @@ export default {
 
 .profile-details {
   @include flex-col-h-cen;
-  width: 350px;
+  min-width: 250px;
+  width: 30%;
   border-left: 1px solid #dbdbdb;
+  position: relative;
 }
 
 .cross-icon {

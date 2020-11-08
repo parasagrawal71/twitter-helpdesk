@@ -44,7 +44,7 @@ export default {
 @import "../utils/commonStyles/flex.scss";
 
 .childtweets {
-  width: 100%;
+  width: 70%;
   position: relative;
 }
 .childtweets-header {
