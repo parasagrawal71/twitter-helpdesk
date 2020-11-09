@@ -7,18 +7,27 @@
       <section class="tweets">
         <section class="tweets--left">
           <section class="tweets-latest">
-            <ParentTweet v-for="item in [0, 1, 2]" :key="item" />
+            <ParentTweet
+              v-for="item in activeMentions"
+              :key="item"
+              :tweetData="item"
+            />
           </section>
           <section class="tweets-expired">
             <div class="tweets-expired-header">
               <span>Expired chats</span>
             </div>
-            <ParentTweet v-for="item in [0, 1, 2, 3]" :key="item" />
+            <ParentTweet
+              v-for="item in expiredMentions"
+              :key="item"
+              :tweetData="item"
+              @click="setCurrentTweet(item)"
+            />
           </section>
         </section>
         <section class="tweets--right">
-          <ChildTweets />
-          <Profile />
+          <ChildTweets :currentTweet="currentTweet" />
+          <Profile :currentTweet="currentTweet" />
         </section>
       </section>
     </section>
@@ -26,16 +35,71 @@
 </template>
 
 <script>
+import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import SubHeader from "../components/SubHeader";
 import ParentTweet from "../components/ParentTweet";
 import ChildTweets from "../components/ChildTweets";
 import Profile from "../components/Profile";
+import mentions from "../../data.json";
+import { readCookie } from "../utils/cookie";
+import { API_HOST } from "../utils/constants";
 
 export default {
   name: "Conversations",
+  data() {
+    return {
+      mentions: mentions,
+      currentTweet: mentions[0],
+    };
+  },
   components: { Sidebar, Header, SubHeader, ParentTweet, ChildTweets, Profile },
+  mounted() {
+    console.log("userData", JSON.parse(readCookie("userData")));
+    // this.fetchMentions();
+  },
+  computed: {
+    activeMentions() {
+      return this.mentions.filter(
+        (item) =>
+          new Date(item.created_at) >
+          new Date(new Date().getTime() - 60 * 60000)
+      );
+    },
+    expiredMentions() {
+      return this.mentions.filter(
+        (item) =>
+          new Date(item.created_at) <=
+          new Date(new Date().getTime() - 60 * 60000)
+      );
+    },
+  },
+  methods: {
+    fetchMentions() {
+      const config = {
+        method: "get",
+        url: `${API_HOST}/api/v1/tweets/mentions`,
+        params: {
+          oauthToken: JSON.parse(readCookie("userData")).oauth_token,
+        },
+      };
+      return axios(config)
+        .then((response) => {
+          console.log(
+            "response",
+            response && response.data && response.data.data
+          );
+        })
+        .catch((error) => {
+          console.log("Error: ", error);
+          return error;
+        });
+    },
+    setCurrentTweet(item) {
+      this.currentTweet = item;
+    },
+  },
 };
 </script>
 
@@ -53,14 +117,14 @@ export default {
   padding: 10px 80px;
 }
 .tweets {
-  padding-top: 40px;
+  padding-top: 20px;
   width: 100%;
   @include flex-row;
 }
 .tweets--left {
   width: 21%;
   overflow-y: scroll;
-  max-height: 74vh;
+  height: 81vh;
 }
 .tweets--left::-webkit-scrollbar {
   display: none;

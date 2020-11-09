@@ -37,14 +37,10 @@
 import axios from "axios";
 import router from "../router";
 import { setCookie } from "../utils/cookie";
+import { API_HOST } from "../utils/constants";
 
 export default {
   name: "Login",
-  data() {
-    return {
-      HOST_URL: "http://localhost:5000", //"https://twitter-helpdesk--server.herokuapp.com",
-    };
-  },
   mounted() {
     this.requestAccessToken();
   },
@@ -56,7 +52,7 @@ export default {
     requestTwitterToken() {
       const config = {
         method: "get",
-        url: `${this.HOST_URL}/api/v1/auth/request_token`,
+        url: `${API_HOST}/api/v1/auth/request_token`,
       };
       return axios(config)
         .then((response) => {
@@ -94,7 +90,7 @@ export default {
 
       await axios({
         method: "post",
-        url: `${this.HOST_URL}/api/v1/auth/access_token`,
+        url: `${API_HOST}/api/v1/auth/access_token`,
         data: {
           oauth_token,
           oauth_verifier,
@@ -105,14 +101,15 @@ export default {
           //   "response",
           //   response && response.data && response.data.data
           // );
-          const { data } = response && response.data;
-          const tempArr = data && data.split("&");
+          const { tokenData, currUser } = response?.data?.data;
+          const tempArr = tokenData && tokenData.split("&");
           const dataArray = tempArr.map((item) => item && item.split("=")[1]);
           const userData = {
             oauth_token: dataArray[0],
             oauth_token_secret: dataArray[1],
             user_id: dataArray[2],
             screen_name: dataArray[3],
+            currUser,
           };
           setCookie("userData", JSON.stringify(userData));
           router.push({ name: "Conversations" });

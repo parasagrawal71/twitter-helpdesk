@@ -36,15 +36,22 @@
         <img src="../assets/img/icon.png" alt="icon" />
       </div>
       <div class="sidebar-profile">
-        <img src="../assets/img/circular.png" alt="icon" />
+        <img :src="currUser?.profile_image_url" alt="icon" />
       </div>
     </section>
   </main>
 </template>
 
 <script>
+import { readCookie } from "../utils/cookie";
+
 export default {
   name: "Sidebar",
+  data() {
+    return {
+      currUser: JSON.parse(readCookie("userData"))?.currUser,
+    };
+  },
 };
 </script>
 

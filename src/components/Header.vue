@@ -3,14 +3,21 @@
     <div class="header--left">Updates</div>
     <section class="header--right">
       <div class="header-session">Session: 34 minutes</div>
-      <div class="header-user">User: Paras Agrawal</div>
+      <div class="header-user">User: {{ currUser?.name }}</div>
     </section>
   </main>
 </template>
 
 <script>
+import { readCookie } from "../utils/cookie";
+
 export default {
   name: "Header",
+  data() {
+    return {
+      currUser: JSON.parse(readCookie("userData"))?.currUser,
+    };
+  },
 };
 </script>
 

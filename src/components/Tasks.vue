@@ -2,12 +2,12 @@
   <section class="tasks">
     <div class="tasks-header">
       <div class="tasks-header-title">Tasks</div>
-      <img src="../assets/img/icon.png" alt="dropdown-icon" />
+      <img src="../assets/img/down-arrow.svg" alt="dropdown-icon" class="dropdown-icon" />
     </div>
     <div class="tasks-list">
-      <div class="tasks-list-item" v-for="item in [0, 1, 2]" :key="item">
+      <div class="tasks-list-item" v-for="item in tasksArray" :key="item">
         <input type="checkbox" />
-        <div class="tasks-list-item-text">Clean up room</div>
+        <div class="tasks-list-item-text">{{item}}</div>
       </div>
     </div>
     <div class="tasks-footer">
@@ -19,6 +19,11 @@
 <script>
 export default {
   name: "Tasks",
+  data() {
+    return {
+      tasksArray: ["Clean up room", "Change linen and towels when guests are out", "Bring complimentary bottle of red wine"]
+    }
+  }
 };
 </script>
 
@@ -40,11 +45,18 @@ export default {
 }
 .tasks-header-title {
 }
+.dropdown-icon{
+  width: 12px;
+  height: 10px;
+}
 .tasks-list {
 }
 .tasks-list-item {
-  @include flex-row;
+  @include flex-row-v-start;
   margin: 10px 0;
+}
+.tasks-list-item input {
+  margin-top: 4px;
 }
 .tasks-list-item-text {
   padding-left: 10px;

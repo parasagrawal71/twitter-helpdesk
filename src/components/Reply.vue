@@ -3,7 +3,7 @@
     <img src="../assets/img/circular.png" alt="assitant" class="profile-pic" />
     <input type="text" class="reply-input" placeholder="Reply..." />
     <img
-      src="../assets/img/circular.png"
+      src="../assets/img/attach.svg"
       alt="attachment-icon"
       class="attachment-icon"
     />
@@ -42,11 +42,10 @@ export default {
   margin-bottom: 10px;
 }
 .attachment-icon {
-  max-width: 20px;
+  width: 15px;
   height: auto;
-  border-radius: 50%;
   position: absolute;
   right: 20px;
-  top: 10px;
+  top: calc(50% - 15px)
 }
 </style>

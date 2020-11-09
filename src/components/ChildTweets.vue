@@ -2,27 +2,27 @@
   <main class="childtweets">
     <section class="childtweets-header">
       <img
-        src="../assets/img/circular.png"
+        :src="currentTweet?.user?.profile_image_url"
         alt="Profile Picture"
         class="childtweets-profilePic"
       />
-      <div class="childtweets-header-name">Paras Agrawal</div>
-      <div class="green-dot"></div>
+      <div class="childtweets-header-name">{{ currentTweet?.user?.name }}</div>
+      <div class="green-dot" v-if="currentTweet?.user?.geo_enabled"></div>
       <div class="childtweets-header-room">Room: 102</div>
       <div class="childtweets-header-time">Oct 1 - Oct 12</div>
       <div class="childtweets-header-create">Create a task</div>
     </section>
     <section class="childtweets-body">
-      <div class="childtweets-body-header">Today</div>
-      <ChildTweetMsg />
+      <div class="childtweets-body-header">{{ getDay() }}</div>
+      <ChildTweetMsg :currentTweet="currentTweet" />
       <div class="childtweets-body-assigned">
         <img
-          src="../assets/img/circular.png"
+          src="../assets/img/customer-service.svg"
           alt="assitant"
-          class="profile-pic"
+          class="customer-service"
         />
         <div class="childtweets-body-assigned-text">
-          <span>Paras Agrawal</span> (you) assigned to this conversations
+          <span>{{ currUser?.name }}</span> (you) assigned to this conversations
         </div>
       </div>
     </section>
@@ -31,12 +31,41 @@
 </template>
 
 <script>
+import moment from "moment";
 import ChildTweetMsg from "./ChildTweetMsg";
 import Reply from "./Reply";
+import { readCookie } from "../utils/cookie";
 
 export default {
   name: "ChildTweets",
+  data() {
+    return {
+      currUser: JSON.parse(readCookie("userData"))?.currUser,
+    };
+  },
   components: { ChildTweetMsg, Reply },
+  props: {
+    currentTweet: Object,
+  },
+  methods: {
+    getDay() {
+      if (
+        new Date(this.currentTweet?.created_at).getDate() ===
+        new Date().getDate()
+      ) {
+        return "Today";
+      } else if (
+        new Date(this.currentTweet?.created_at).getDate() ===
+        new Date().getDate() - 1
+      ) {
+        return "Yesterday";
+      } else {
+        return moment(new Date(this.currentTweet?.created_at)).format(
+          "DD MMM, YYYY"
+        );
+      }
+    },
+  },
 };
 </script>
 
@@ -99,7 +128,7 @@ export default {
 .childtweets-body-assigned-text span {
   color: #bd0f0f;
 }
-.profile-pic {
+.customer-service {
   max-width: 20px;
   height: auto;
   border-radius: 50%;

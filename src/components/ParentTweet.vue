@@ -2,21 +2,25 @@
   <section class="tweetbox">
     <div class="tweetbox--left">
       <img
-        src="../assets/img/circular.png"
+        :src="tweetData?.user?.profile_image_url"
         alt="Profile Picture"
         class="tweetbox-profilePic"
       />
     </div>
     <div class="tweetbox--right">
       <div class="tweetbox-header">
-        <div class="tweetbox-header-name">Paras Agrawal</div>
-        <div class="green_dot"></div>
-        <div class="tweetbox-header-msgCount">2</div>
+        <div class="tweetbox-header-name">{{ tweetData?.user?.name }}</div>
+        <div class="green_dot" v-if="tweetData?.user?.geo_enabled"></div>
+        <div
+          class="tweetbox-header-msgCount"
+          v-if="tweetData?.user?.listed_count !== 0"
+        >
+          {{ tweetData?.user?.listed_count }}
+        </div>
       </div>
 
       <div class="tweetbox-msg">
-        Hello there! May I ask a favor? Can you book dosa in breakfast for
-        morning
+        {{ tweetData?.text.replace("@shop__anywhere", "") }}
       </div>
     </div>
   </section>
@@ -25,6 +29,9 @@
 <script>
 export default {
   name: "TweetBox",
+  props: {
+    tweetData: Object,
+  },
 };
 </script>
 
@@ -33,12 +40,14 @@ export default {
 
 .tweetbox {
   border: 1px solid lightgrey;
-  border-radius: 4px;
-  // width: 255px;
+  border-radius: 3px;
   max-height: 60px;
   @include flex-row;
   padding: 15px 10px;
   margin-bottom: 10px;
+}
+.tweetbox:hover {
+  cursor: pointer;
 }
 
 .tweetbox--left {
@@ -49,22 +58,25 @@ export default {
   max-width: 20px;
   height: auto;
   border-radius: 50%;
+  margin-top: 4px;
 }
 
 .tweetbox--right {
   text-align: left;
-  padding-left: 20px;
+  padding-left: 15px;
+  width: 100%;
 }
 
 .tweetbox-header {
   position: relative;
   @include flex-row-v-cen;
   padding-bottom: 5px;
+  width: 100%;
 }
 
 .tweetbox-header-name {
   padding-right: 5px;
-  font-size: 16px;
+  font-size: 14px;
   color: black;
 }
 
@@ -93,7 +105,7 @@ export default {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   white-space: normal;
-  font-size: 14px;
+  font-size: 13px;
   color: grey;
 }
 </style>

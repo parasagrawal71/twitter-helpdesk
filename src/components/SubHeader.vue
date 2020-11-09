@@ -6,7 +6,11 @@
         <Searchbox />
       </div>
       <div class="subheader-filter">
-        <img src="../assets/img/icon.png" alt="filter-icon" />
+        <img
+          src="../assets/img/filter.svg"
+          alt="filter-icon"
+          class="filter-icon"
+        />
         <div class="subheader-filter-text">Filter</div>
       </div>
     </section>
@@ -32,7 +36,7 @@ export default {
 .subheader {
   @include flex-row-b-sb-cen;
   flex: 1;
-  padding-top: 50px;
+  padding-top: 30px;
 }
 .subheader--left {
   @include flex-row-v-cen;
@@ -52,9 +56,13 @@ export default {
   padding: 4px 15px;
   border-radius: 15px;
 }
+.filter-icon {
+  width: 15px;
+  height: 15px;
+}
 .subheader-filter-text {
   font-size: 14px;
-  padding-left: 5px;
+  padding-left: 10px;
 }
 .subheader--right {
   @include flex-row-v-cen;
