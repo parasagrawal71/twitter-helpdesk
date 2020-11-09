@@ -12,28 +12,36 @@
 
     <section class="sidebar-btns">
       <div class="sidebar-btn">
-        <img src="../assets/img/icon.png" alt="icon" />
+        <img src="../assets/img/timer.svg" alt="timer-icon" id="timer-icon" />
       </div>
       <div class="sidebar-btn">
-        <img src="../assets/img/icon.png" alt="icon" />
+        <img src="../assets/img/home.svg" alt="home-icon" id="home-icon" />
       </div>
       <div class="sidebar-btn">
-        <img src="../assets/img/icon.png" alt="icon" />
+        <img src="../assets/img/users.svg" alt="users-icon" id="users-icon" />
       </div>
       <div class="sidebar-btn active">
-        <img src="../assets/img/icon.png" alt="icon" />
+        <img src="../assets/img/chat.svg" alt="chat-icon" id="chat-icon" />
       </div>
       <div class="sidebar-btn">
-        <img src="../assets/img/icon.png" alt="icon" />
+        <img
+          src="../assets/img/credit-card.svg"
+          alt="credit-card-icon"
+          id="credit-card-icon"
+        />
       </div>
       <div class="sidebar-btn">
-        <img src="../assets/img/icon.png" alt="icon" />
+        <img src="../assets/img/store.svg" alt="store-icon" id="store-icon" />
       </div>
     </section>
 
     <section class="sidebar-bottom">
       <div class="sidebar-bottom-icon">
-        <img src="../assets/img/icon.png" alt="icon" />
+        <img
+          src="../assets/img/record.svg"
+          alt="record-icon"
+          id="record-icon"
+        />
       </div>
       <div class="sidebar-profile">
         <img :src="currUser?.profile_image_url" alt="icon" />
@@ -94,9 +102,13 @@ export default {
 }
 .sidebar-btn {
   width: 100%;
-  margin: 5px 0;
+  margin: 10px 0;
   padding: 10px 0;
   @include flex-row-cen;
+}
+.sidebar-btn img {
+  width: 22px;
+  height: 22px;
 }
 .active {
   background: #e8e7e4;

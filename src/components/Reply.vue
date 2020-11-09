@@ -1,6 +1,10 @@
 <template>
   <section class="reply">
-    <img src="../assets/img/circular.png" alt="assitant" class="profile-pic" />
+    <img
+      :src="currUser?.profile_image_url"
+      alt="assitant"
+      class="profile-pic"
+    />
     <input type="text" class="reply-input" placeholder="Reply..." />
     <img
       src="../assets/img/attach.svg"
@@ -11,8 +15,15 @@
 </template>
 
 <script>
+import { readCookie } from "../utils/cookie";
+
 export default {
   name: "Reply",
+  data() {
+    return {
+      currUser: JSON.parse(readCookie("userData"))?.currUser,
+    };
+  },
 };
 </script>
 
@@ -29,6 +40,7 @@ export default {
   max-width: 20px;
   height: auto;
   border-radius: 50%;
+  margin-top: 2px;
 }
 .reply-input {
   outline: none;
@@ -46,6 +58,6 @@ export default {
   height: auto;
   position: absolute;
   right: 20px;
-  top: calc(50% - 15px)
+  top: calc(50% - 15px);
 }
 </style>
