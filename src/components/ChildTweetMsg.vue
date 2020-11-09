@@ -10,7 +10,7 @@
     <div class="childtweetmsg--right">
       <div class="childtweetmsg-header">
         <div class="childtweetmsg-greet">
-          {{ currentTweet?.text.replace("@shop__anywhere", "") }}
+          {{ currentTweet?.text?.replace("@shop__anywhere", "") }}
         </div>
         <div class="childtweetmsg-time">
           {{ currentTweetTime }}

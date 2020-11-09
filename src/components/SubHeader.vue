@@ -17,6 +17,11 @@
     <div class="subheader--right">
       <div class="green-dot"></div>
       <div class="subheader-online">Online</div>
+      <img
+        src="../assets/img/dropdown.svg"
+        alt="dropdown-icon"
+        class="dropdown-icon"
+      />
     </div>
   </main>
 </template>
@@ -77,6 +82,10 @@ export default {
   background: #29cb41;
 }
 .subheader-online {
-  padding-left: 10px;
+  padding: 0 10px;
+}
+.dropdown-icon {
+  width: 10px;
+  height: 10px;
 }
 </style>
