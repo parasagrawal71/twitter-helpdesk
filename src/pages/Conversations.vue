@@ -3,7 +3,7 @@
     <section class="conversations--left"><Sidebar /></section>
     <section class="conversations--right">
       <Header />
-      <SubHeader />
+      <SubHeader @searchText="setSearchText" />
       <section class="tweets">
         <section class="tweets--left">
           <section class="tweets-latest">
@@ -11,6 +11,7 @@
               v-for="item in activeMentions"
               :key="item"
               :tweetData="item"
+              @click="setCurrentTweet(item)"
             />
           </section>
           <section class="tweets-expired">
@@ -43,6 +44,7 @@ import ParentTweet from "../components/ParentTweet";
 import ChildTweets from "../components/ChildTweets";
 import Profile from "../components/Profile";
 import mentions from "../../data.json";
+import { readCookie } from "../utils/cookie";
 import { API_HOST } from "../utils/constants";
 
 export default {
@@ -53,11 +55,12 @@ export default {
       // currentTweet: [],
       mentions: mentions,
       currentTweet: mentions[0],
+      searchText: "",
     };
   },
   components: { Sidebar, Header, SubHeader, ParentTweet, ChildTweets, Profile },
   mounted() {
-    // console.log("userData", JSON.parse(readCookie("userData")));
+    console.log("userData", JSON.parse(readCookie("userData")));
     // this.fetchMentions();
   },
   computed: {
@@ -77,6 +80,9 @@ export default {
     },
   },
   methods: {
+    setSearchText(value) {
+      this.searchText = value;
+    },
     fetchMentions() {
       const config = {
         method: "get",
@@ -85,7 +91,7 @@ export default {
       return axios(config)
         .then((response) => {
           const { data } = response && response.data;
-          // console.log("response", data);
+          // console.log("data", data);
           this.mentions = data;
           this.currentTweet = data[0];
         })

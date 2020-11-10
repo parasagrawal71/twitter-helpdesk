@@ -22,11 +22,13 @@
           class="customer-service"
         />
         <div class="childtweets-body-assigned-text">
-          <span>{{ currUser?.name }}</span> (you) assigned to this conversations
+          <span>{{ currUser?.name }}</span> (you) assigned to this conversation
         </div>
       </div>
     </section>
-    <div class="childtweets-body-reply"><Reply /></div>
+    <div class="childtweets-body-reply">
+      <Reply :currentTweet="currentTweet" />
+    </div>
   </main>
 </template>
 

@@ -5,13 +5,28 @@
       alt="Search Icon"
       class="search-icon"
     />
-    <input class="searchbox-input" type="text" placeholder="Quick Search" />
+    <input
+      class="searchbox-input"
+      type="text"
+      placeholder="Quick Search"
+      v-model="searchText"
+    />
   </section>
 </template>
 
 <script>
 export default {
   name: "Searchbox",
+  data() {
+    return {
+      searchText: "",
+    };
+  },
+  watch: {
+    searchText: function() {
+      this.$emit("search-text", this.searchText);
+    },
+  },
 };
 </script>
 

@@ -3,7 +3,7 @@
     <section class="subheader--left">
       <div class="subheader-text">Conversations</div>
       <div class="subheader-searchbox">
-        <Searchbox />
+        <Searchbox @searchText="searchText" />
       </div>
       <div class="subheader-filter">
         <img

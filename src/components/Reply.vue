@@ -5,7 +5,13 @@
       alt="assitant"
       class="profile-pic"
     />
-    <input type="text" class="reply-input" placeholder="Reply..." />
+    <input
+      type="text"
+      class="reply-input"
+      placeholder="Reply..."
+      :onkeydown="reply"
+      v-model="message"
+    />
     <img
       src="../assets/img/attach.svg"
       alt="attachment-icon"
@@ -15,14 +21,48 @@
 </template>
 
 <script>
+import axios from "axios";
 import { readCookie } from "../utils/cookie";
+import { API_HOST } from "../utils/constants";
 
 export default {
   name: "Reply",
   data() {
     return {
       currUser: JSON.parse(readCookie("userData"))?.currUser,
+      message: "",
     };
+  },
+  props: {
+    currentTweet: Object,
+  },
+  methods: {
+    reply(event) {
+      if (event.key === "Enter") {
+        // this.replyToTweet();
+      }
+    },
+    replyToTweet() {
+      const config = {
+        method: "post",
+        url: `${API_HOST}/api/v1/tweets/reply/${this.currentTweet?.id_str}`,
+        data: {
+          status: `@${this.currentTweet?.user?.screen_name} ${this.message}`,
+          // username: "@" + this.currentTweet?.user?.screen_name,
+        },
+      };
+      return axios(config)
+        .then((response) => {
+          const { data } = response && response.data;
+          console.log("response", data);
+          this.message = "";
+        })
+        .catch((error) => {
+          console.log("Error: ", error);
+          this.message = "";
+          return error;
+        });
+    },
   },
 };
 </script>

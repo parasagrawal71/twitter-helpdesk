@@ -13,11 +13,11 @@
           {{ currentTweet?.text?.replace("@shop__anywhere", "") }}
         </div>
         <div class="childtweetmsg-time">
-          {{ currentTweetTime }}
+          {{ moment(this.currentTweet?.created_at).format("h:mm") }}
         </div>
       </div>
 
-      <div class="childtweetmsg-descrp">
+      <!-- <div class="childtweetmsg-descrp">
         I have a problem in my room, it needs to be cleaned.
       </div>
       <div class="childtweetmsg-imgs">
@@ -27,25 +27,27 @@
       </div>
       <div class="childtweetmsg-descrp">
         This is what I see! Not good!
-      </div>
+      </div> -->
     </div>
   </section>
 </template>
 
 <script>
-// import moment from "moment";
+import moment from "moment";
 
 export default {
   name: "ChildTweetMsg",
-  data() {
-    return {
-      currentTweetTime: this.currentTweet?.created_at,
-    };
-  },
   props: {
     currentTweet: Object,
   },
-  methods: {},
+  updated() {
+    console.log(this.currentTweet?.created_at);
+  },
+  methods: {
+    moment() {
+      return moment();
+    },
+  },
 };
 </script>
 
