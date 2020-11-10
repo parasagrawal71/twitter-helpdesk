@@ -14,7 +14,12 @@
     </section>
     <section class="childtweets-body">
       <div class="childtweets-body-header">{{ getDay() }}</div>
-      <ChildTweetMsg :currentTweet="currentTweet" />
+      <ChildTweetMsg
+        :currentTweet="currentTweet"
+        :text="currentTweet?.text?.replace('@shop__anywhere', '')"
+        :time="moment(this.currentTweet?.created_at).format('h:mm')"
+        :profile="currentTweet?.user?.profile_image_url"
+      />
       <div class="childtweets-body-assigned">
         <img
           src="../assets/img/customer-service.svg"
@@ -25,6 +30,14 @@
           <span>{{ currUser?.name }}</span> (you) assigned to this conversation
         </div>
       </div>
+      <ChildTweetMsg
+        :currentTweet="currentTweet"
+        :text="item"
+        :time="moment(this.currentTweet?.created_at).format('h:mm')"
+        :profile="currUser?.profile_image_url"
+        v-for="item in replies"
+        :key="item"
+      />
     </section>
     <div class="childtweets-body-reply">
       <Reply :currentTweet="currentTweet" />
@@ -43,6 +56,7 @@ export default {
   data() {
     return {
       currUser: JSON.parse(readCookie("userData"))?.currUser,
+      replies: ["Thanks"],
     };
   },
   components: { ChildTweetMsg, Reply },
@@ -50,6 +64,9 @@ export default {
     currentTweet: Object,
   },
   methods: {
+    moment() {
+      return moment();
+    },
     getDay() {
       if (
         new Date(this.currentTweet?.created_at).getDate() ===
@@ -122,6 +139,7 @@ export default {
 .childtweets-body-assigned {
   @include flex-row-v-cen;
   padding: 5px 10px;
+  margin: 20px 0;
 }
 .childtweets-body-assigned-text {
   padding-left: 10px;

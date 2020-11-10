@@ -1,19 +1,15 @@
 <template>
   <section class="childtweetmsg">
     <div class="childtweetmsg--left">
-      <img
-        :src="currentTweet?.user?.profile_image_url"
-        alt="Profile Picture"
-        class="profile-pic"
-      />
+      <img :src="profile" alt="Profile Picture" class="profile-pic" />
     </div>
     <div class="childtweetmsg--right">
       <div class="childtweetmsg-header">
         <div class="childtweetmsg-greet">
-          {{ currentTweet?.text?.replace("@shop__anywhere", "") }}
+          {{ text }}
         </div>
         <div class="childtweetmsg-time">
-          {{ moment(this.currentTweet?.created_at).format("h:mm") }}
+          {{ time }}
         </div>
       </div>
 
@@ -33,20 +29,13 @@
 </template>
 
 <script>
-import moment from "moment";
-
 export default {
   name: "ChildTweetMsg",
   props: {
     currentTweet: Object,
-  },
-  updated() {
-    console.log(this.currentTweet?.created_at);
-  },
-  methods: {
-    moment() {
-      return moment();
-    },
+    text: String,
+    time: String,
+    profile: String,
   },
 };
 </script>
@@ -58,7 +47,6 @@ export default {
   border-radius: 4px;
   @include flex-row;
   padding: 5px 10px;
-  margin-bottom: 10px;
 }
 .childtweetmsg--left {
 }
@@ -66,7 +54,7 @@ export default {
   max-width: 20px;
   height: auto;
   border-radius: 50%;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 .childtweetmsg--right {
   text-align: left;
