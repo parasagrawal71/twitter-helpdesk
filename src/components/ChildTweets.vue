@@ -128,7 +128,10 @@ export default {
         method: "post",
         url: `${API_HOST}/api/v1/tweets/reply/${this.currentTweet?.id_str}`,
         data: {
-          status: `@${this.currentTweet?.user?.screen_name} ${tweetMsg}`,
+          status: `@${this.currentTweet?.user?.screen_name} ${tweetMsg.replace(
+            /[^a-zA-Z ]/g,
+            ""
+          )}`,
           // username: "@" + this.currentTweet?.user?.screen_name,
         },
       };
@@ -144,7 +147,10 @@ export default {
           vm.currentTweet.replies = [
             ...vm.currentTweet?.replies,
             {
-              text: `@${vm.currentTweet?.user?.screen_name} ${tweetMsg}`,
+              text: `@${vm.currentTweet?.user?.screen_name} ${tweetMsg.replace(
+                /[^a-zA-Z ]/g,
+                ""
+              )}`,
               referenced_tweets: [
                 {
                   type: "replied_to",
