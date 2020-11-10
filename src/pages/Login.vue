@@ -113,7 +113,6 @@ export default {
           };
           setCookie("userData", JSON.stringify(userData));
           router.push({ name: "Conversations" });
-          // window.location.replace("/");
         })
         .catch((error) => {
           // console.log("Error: ", error);
