@@ -31,12 +31,12 @@
         </div>
       </div>
       <ChildTweetMsg
-        :currentTweet="currentTweet"
-        :text="item"
-        :time="moment(this.currentTweet?.created_at).format('h:mm')"
-        :profile="currUser?.profile_image_url"
-        v-for="item in replies"
+        v-for="item in currentTweet?.replies"
         :key="item"
+        :currentTweet="currentTweet"
+        :text="item?.text.replace(`@${currentTweet?.user?.screen_name} `, '')"
+        :time="moment(currentTweet?.created_at).format('h:mm')"
+        :profile="currUser?.profile_image_url"
       />
     </section>
     <div class="childtweets-body-reply">
@@ -56,7 +56,6 @@ export default {
   data() {
     return {
       currUser: JSON.parse(readCookie("userData"))?.currUser,
-      replies: ["Thanks"],
     };
   },
   components: { ChildTweetMsg, Reply },
@@ -139,7 +138,7 @@ export default {
 .childtweets-body-assigned {
   @include flex-row-v-cen;
   padding: 5px 10px;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 .childtweets-body-assigned-text {
   padding-left: 10px;

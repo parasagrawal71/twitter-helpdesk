@@ -47,6 +47,7 @@ export default {
   border-radius: 4px;
   @include flex-row;
   padding: 5px 10px;
+  margin: 20px 0;
 }
 .childtweetmsg--left {
 }

@@ -81,7 +81,20 @@
     "favorite_count": 0,
     "favorited": false,
     "retweeted": false,
-    "lang": "und"
+    "lang": "und",
+    "replies": [
+      {
+        "text": "@paras__fbg Awesome",
+        "in_reply_to_user_id": "723534162385231875",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1325948868823982080"
+          }
+        ],
+        "id": "1326060041464471552"
+      }
+    ]
   },
   {
     "created_at": "Sun Nov 08 19:39:14 +0000 2020",
@@ -165,7 +178,20 @@
     "favorite_count": 0,
     "favorited": false,
     "retweeted": false,
-    "lang": "en"
+    "lang": "en",
+    "replies": [
+      {
+        "id": "1325942688705732609",
+        "text": "@GuruprasadJShet Thanks",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1325523292472500224"
+          }
+        ],
+        "in_reply_to_user_id": "555832158"
+      }
+    ]
   },
   {
     "created_at": "Sun Nov 08 19:35:08 +0000 2020",
@@ -249,7 +275,8 @@
     "favorite_count": 0,
     "favorited": false,
     "retweeted": false,
-    "lang": "und"
+    "lang": "und",
+    "replies": []
   },
   {
     "created_at": "Sun Nov 08 19:28:27 +0000 2020",
@@ -333,6 +360,30 @@
     "favorite_count": 0,
     "favorited": false,
     "retweeted": false,
-    "lang": "en"
+    "lang": "en",
+    "replies": [
+      {
+        "text": "@paras__fbg Nice",
+        "in_reply_to_user_id": "723534162385231875",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1325520579609333760"
+          }
+        ],
+        "id": "1326060486924726273"
+      },
+      {
+        "text": "@paras__fbg Thanks",
+        "in_reply_to_user_id": "723534162385231875",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1325520579609333760"
+          }
+        ],
+        "id": "1325942339886411776"
+      }
+    ]
   }
 ]
