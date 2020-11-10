@@ -33,7 +33,7 @@
         </div>
       </div>
       <ChildTweetMsg
-        v-for="item in this.currentTweet?.replies"
+        v-for="item in showReplies"
         :key="item"
         :currentTweet="currentTweet"
         :text="
@@ -89,6 +89,12 @@ export default {
   components: { ChildTweetMsg, DefaultProfile },
   props: {
     currentTweet: Object,
+    fetchMentions: Function,
+  },
+  computed: {
+    showReplies() {
+      return this.currentTweet?.replies;
+    },
   },
   methods: {
     moment() {
@@ -114,30 +120,15 @@ export default {
     reply(event) {
       if (event.key === "Enter") {
         this.replyToTweet(event.target.value);
-        // this.message = "";
-        // if (!this.currentTweet?.replies) {
-        //   return
-        // }
-        // this.currentTweet.replies = [
-        //   ...this.currentTweet?.replies,
-        //   {
-        //     text: `@${this.currentTweet?.user?.screen_name} ${event.target.value}`,
-        //     referenced_tweets: [
-        //       {
-        //         type: "replied_to",
-        //         id: this.currentTweet?.id_str,
-        //       },
-        //     ],
-        //   },
-        // ];
       }
     },
     replyToTweet(tweetMsg) {
+      const vm = this;
       const config = {
         method: "post",
         url: `${API_HOST}/api/v1/tweets/reply/${this.currentTweet?.id_str}`,
         data: {
-          status: `@${this.currentTweet?.user?.screen_name} ${this.message}`,
+          status: `@${this.currentTweet?.user?.screen_name} ${tweetMsg}`,
           // username: "@" + this.currentTweet?.user?.screen_name,
         },
       };
@@ -145,19 +136,19 @@ export default {
         .then((response) => {
           const { data } = response && response.data;
           console.log("response", data);
-          this.message = "";
-          if (!this.currentTweet?.replies) {
+          vm.message = "";
+          if (!vm.currentTweet?.replies) {
             return;
           }
           // eslint-disable-next-line vue/no-mutating-props
-          this.currentTweet.replies = [
-            ...this.currentTweet?.replies,
+          vm.currentTweet.replies = [
+            ...vm.currentTweet?.replies,
             {
-              text: `@${this.currentTweet?.user?.screen_name} ${tweetMsg}`,
+              text: `@${vm.currentTweet?.user?.screen_name} ${tweetMsg}`,
               referenced_tweets: [
                 {
                   type: "replied_to",
-                  id: this.currentTweet?.id_str,
+                  id: vm.currentTweet?.id_str,
                 },
               ],
             },

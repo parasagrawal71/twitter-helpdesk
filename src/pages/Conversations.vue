@@ -27,7 +27,10 @@
           </section>
         </section>
         <section class="tweets--right">
-          <ChildTweets :currentTweet="currentTweet" />
+          <ChildTweets
+            :currentTweet="currentTweet"
+            :fetchMentions="fetchMentions"
+          />
           <Profile :currentTweet="currentTweet" />
         </section>
       </section>
@@ -44,7 +47,7 @@ import ParentTweet from "../components/ParentTweet";
 import ChildTweets from "../components/ChildTweets";
 import Profile from "../components/Profile";
 // import mentions from "../../data.json";
-import { readCookie } from "../utils/cookie";
+// import { readCookie } from "../utils/cookie";
 import { API_HOST } from "../utils/constants";
 
 export default {
@@ -60,7 +63,6 @@ export default {
   },
   components: { Sidebar, Header, SubHeader, ParentTweet, ChildTweets, Profile },
   mounted() {
-    console.log("userData", JSON.parse(readCookie("userData")));
     this.fetchMentions();
   },
   computed: {
