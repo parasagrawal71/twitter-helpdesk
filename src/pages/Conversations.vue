@@ -46,8 +46,6 @@ import SubHeader from "../components/SubHeader";
 import ParentTweet from "../components/ParentTweet";
 import ChildTweets from "../components/ChildTweets";
 import Profile from "../components/Profile";
-// import mentions from "../../data.json";
-// import { readCookie } from "../utils/cookie";
 import { API_HOST } from "../utils/constants";
 
 export default {
@@ -56,8 +54,6 @@ export default {
     return {
       mentions: [],
       currentTweet: [],
-      // mentions: mentions,
-      // currentTweet: mentions[0],
       searchText: "",
     };
   },
@@ -70,14 +66,14 @@ export default {
       return this.mentions.filter(
         (item) =>
           new Date(item.created_at) >
-          new Date(new Date().getTime() - 60 * 60000)
+          new Date(new Date().getTime() - 48 * 60 * 60000)
       );
     },
     expiredMentions() {
       return this.mentions.filter(
         (item) =>
           new Date(item.created_at) <=
-          new Date(new Date().getTime() - 60 * 60000)
+          new Date(new Date().getTime() - 48 * 60 * 60000)
       );
     },
   },

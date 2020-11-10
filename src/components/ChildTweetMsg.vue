@@ -18,18 +18,6 @@
           {{ time }}
         </div>
       </div>
-
-      <!-- <div class="childtweetmsg-descrp">
-        I have a problem in my room, it needs to be cleaned.
-      </div>
-      <div class="childtweetmsg-imgs">
-        <img src="../assets/img/hotel-room-1.jpg" alt="hotel room" />
-        <img src="../assets/img/hotel-room-2.jpg" alt="hotel room" />
-        <img src="../assets/img/hotel-room-1.jpg" alt="hotel room" />
-      </div>
-      <div class="childtweetmsg-descrp">
-        This is what I see! Not good!
-      </div> -->
     </div>
   </section>
 </template>
