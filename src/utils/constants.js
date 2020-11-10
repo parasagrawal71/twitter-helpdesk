@@ -1,2 +1,8 @@
 // API HOST URLs
-export const API_HOST = "http://localhost:5000"; // "https://twitter-helpdesk--server.herokuapp.com";
+let HOST_URL;
+if (window.location.origin === "https://twitter--helpdesk.herokuapp.com") {
+  HOST_URL = "https://twitter-helpdesk--server.herokuapp.com";
+} else {
+  HOST_URL = "http://localhost:5000";
+}
+export const API_HOST = HOST_URL;
