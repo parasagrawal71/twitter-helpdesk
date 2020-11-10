@@ -43,7 +43,7 @@ import SubHeader from "../components/SubHeader";
 import ParentTweet from "../components/ParentTweet";
 import ChildTweets from "../components/ChildTweets";
 import Profile from "../components/Profile";
-import mentions from "../../data.json";
+// import mentions from "../../data.json";
 import { readCookie } from "../utils/cookie";
 import { API_HOST } from "../utils/constants";
 
@@ -51,17 +51,17 @@ export default {
   name: "Conversations",
   data() {
     return {
-      // mentions: [],
-      // currentTweet: [],
-      mentions: mentions,
-      currentTweet: mentions[0],
+      mentions: [],
+      currentTweet: [],
+      // mentions: mentions,
+      // currentTweet: mentions[0],
       searchText: "",
     };
   },
   components: { Sidebar, Header, SubHeader, ParentTweet, ChildTweets, Profile },
   mounted() {
     console.log("userData", JSON.parse(readCookie("userData")));
-    // this.fetchMentions();
+    this.fetchMentions();
   },
   computed: {
     activeMentions() {

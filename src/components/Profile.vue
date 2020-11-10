@@ -5,9 +5,14 @@
       :src="currentTweet?.user?.profile_image_url"
       alt="Profile"
       class="profile-details-pic"
+      v-if="currentTweet?.user?.profile_image_url"
     />
+    <DefaultProfile width="50px" v-else />
     <div class="profile-details-name">{{ currentTweet?.user?.name }}</div>
-    <div :class="currentTweet?.user?.geo_enabled ? 'green' : 'grey'" class="profile-details-status">
+    <div
+      :class="currentTweet?.user?.geo_enabled ? 'green' : 'grey'"
+      class="profile-details-status"
+    >
       {{ currentTweet?.user?.geo_enabled ? "Online" : "Offline" }}
     </div>
     <div class="profile-details-contact">
@@ -49,10 +54,11 @@
 
 <script>
 import Tasks from "./Tasks";
+import DefaultProfile from "./DefaultProfile";
 
 export default {
   name: "Profile",
-  components: { Tasks },
+  components: { Tasks, DefaultProfile },
   props: {
     currentTweet: Object,
   },
@@ -73,7 +79,7 @@ export default {
 .cross-icon {
   width: 12px;
   height: 12px;
-  background: #F7F6F3;
+  background: #f7f6f3;
   padding: 5px;
   border-radius: 50%;
   align-self: flex-end;
@@ -108,7 +114,7 @@ export default {
   font-size: 14px;
 }
 .profile-details-call {
-  background: #F7F6F3;
+  background: #f7f6f3;
   border-radius: 10px;
   padding: 4px 14px;
   @include flex-row-v-cen;
@@ -119,7 +125,7 @@ export default {
   margin-right: 5px;
 }
 .profile-details-email {
-  background: #F7F6F3;
+  background: #f7f6f3;
   border-radius: 10px;
   padding: 4px 13px;
   @include flex-row-v-cen;

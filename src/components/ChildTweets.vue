@@ -5,7 +5,9 @@
         :src="currentTweet?.user?.profile_image_url"
         alt="Profile Picture"
         class="childtweets-profilePic"
+        v-if="currentTweet?.user?.profile_image_url"
       />
+      <DefaultProfile v-else />
       <div class="childtweets-header-name">{{ currentTweet?.user?.name }}</div>
       <div class="green-dot" v-if="currentTweet?.user?.geo_enabled"></div>
       <div class="childtweets-header-room">Room: 102</div>
@@ -16,8 +18,8 @@
       <div class="childtweets-body-header">{{ getDay() }}</div>
       <ChildTweetMsg
         :currentTweet="currentTweet"
-        :text="currentTweet?.text?.replace('@shop__anywhere', '')"
-        :time="moment(this.currentTweet?.created_at).format('h:mm')"
+        :text="currentTweet?.text?.replace('@shop__anywhere', '')?.trim()"
+        :time="moment(currentTweet?.created_at).format('h:mm')"
         :profile="currentTweet?.user?.profile_image_url"
       />
       <div class="childtweets-body-assigned">
@@ -31,34 +33,60 @@
         </div>
       </div>
       <ChildTweetMsg
-        v-for="item in currentTweet?.replies"
+        v-for="item in this.currentTweet?.replies"
         :key="item"
         :currentTweet="currentTweet"
-        :text="item?.text.replace(`@${currentTweet?.user?.screen_name} `, '')"
+        :text="
+          item?.text?.replace(`@${currentTweet?.user?.screen_name}`, '')?.trim()
+        "
         :time="moment(currentTweet?.created_at).format('h:mm')"
         :profile="currUser?.profile_image_url"
       />
     </section>
     <div class="childtweets-body-reply">
-      <Reply :currentTweet="currentTweet" />
+      <section class="reply">
+        <img
+          :src="currUser?.profile_image_url"
+          alt="assitant"
+          class="profile-pic"
+          v-if="currUser?.profile_image_url"
+        />
+        <DefaultProfile v-else />
+
+        <input
+          type="text"
+          class="reply-input"
+          placeholder="Reply..."
+          :onkeydown="reply"
+          v-model="message"
+        />
+        <img
+          src="../assets/img/attach.svg"
+          alt="attachment-icon"
+          class="attachment-icon"
+        />
+      </section>
     </div>
   </main>
 </template>
 
 <script>
+import axios from "axios";
 import moment from "moment";
 import ChildTweetMsg from "./ChildTweetMsg";
-import Reply from "./Reply";
 import { readCookie } from "../utils/cookie";
+import { API_HOST } from "../utils/constants";
+import DefaultProfile from "./DefaultProfile";
 
 export default {
   name: "ChildTweets",
   data() {
     return {
       currUser: JSON.parse(readCookie("userData"))?.currUser,
+      message: "",
     };
   },
-  components: { ChildTweetMsg, Reply },
+  components: { ChildTweetMsg, DefaultProfile },
   props: {
     currentTweet: Object,
   },
@@ -82,6 +110,64 @@ export default {
           "DD MMM, YYYY"
         );
       }
+    },
+    reply(event) {
+      if (event.key === "Enter") {
+        this.replyToTweet(event.target.value);
+        // this.message = "";
+        // if (!this.currentTweet?.replies) {
+        //   return
+        // }
+        // this.currentTweet.replies = [
+        //   ...this.currentTweet?.replies,
+        //   {
+        //     text: `@${this.currentTweet?.user?.screen_name} ${event.target.value}`,
+        //     referenced_tweets: [
+        //       {
+        //         type: "replied_to",
+        //         id: this.currentTweet?.id_str,
+        //       },
+        //     ],
+        //   },
+        // ];
+      }
+    },
+    replyToTweet(tweetMsg) {
+      const config = {
+        method: "post",
+        url: `${API_HOST}/api/v1/tweets/reply/${this.currentTweet?.id_str}`,
+        data: {
+          status: `@${this.currentTweet?.user?.screen_name} ${this.message}`,
+          // username: "@" + this.currentTweet?.user?.screen_name,
+        },
+      };
+      return axios(config)
+        .then((response) => {
+          const { data } = response && response.data;
+          console.log("response", data);
+          this.message = "";
+          if (!this.currentTweet?.replies) {
+            return;
+          }
+          // eslint-disable-next-line vue/no-mutating-props
+          this.currentTweet.replies = [
+            ...this.currentTweet?.replies,
+            {
+              text: `@${this.currentTweet?.user?.screen_name} ${tweetMsg}`,
+              referenced_tweets: [
+                {
+                  type: "replied_to",
+                  id: this.currentTweet?.id_str,
+                },
+              ],
+            },
+          ];
+        })
+        .catch((error) => {
+          // console.log("Error: ", error);
+          this.message = "";
+          return error;
+        });
     },
   },
 };
@@ -157,5 +243,36 @@ export default {
   position: absolute;
   bottom: 0;
   width: 90%;
+}
+
+.reply {
+  @include flex-row-v-start;
+  padding-left: 10px;
+  width: 100%;
+  position: relative;
+}
+.profile-pic {
+  max-width: 20px;
+  height: auto;
+  border-radius: 50%;
+  margin-top: 2px;
+}
+.reply-input {
+  outline: none;
+  color: grey;
+  border: 1px solid #d5d5d5;
+  border-radius: 5px;
+  height: 40px;
+  width: 100%;
+  padding-left: 20px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+.attachment-icon {
+  width: 15px;
+  height: auto;
+  position: absolute;
+  right: 20px;
+  top: calc(50% - 15px);
 }
 </style>

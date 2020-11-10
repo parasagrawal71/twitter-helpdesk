@@ -1,7 +1,13 @@
 <template>
   <section class="childtweetmsg">
     <div class="childtweetmsg--left">
-      <img :src="profile" alt="Profile Picture" class="profile-pic" />
+      <img
+        :src="profile"
+        alt="Profile Picture"
+        class="profile-pic"
+        v-if="profile"
+      />
+      <DefaultProfile v-else />
     </div>
     <div class="childtweetmsg--right">
       <div class="childtweetmsg-header">
@@ -29,6 +35,8 @@
 </template>
 
 <script>
+import DefaultProfile from "./DefaultProfile";
+
 export default {
   name: "ChildTweetMsg",
   props: {
@@ -37,6 +45,7 @@ export default {
     time: String,
     profile: String,
   },
+  components: { DefaultProfile },
 };
 </script>
 
