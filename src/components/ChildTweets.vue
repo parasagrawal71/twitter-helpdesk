@@ -18,7 +18,9 @@
       <div class="childtweets-body-header">{{ getDay() }}</div>
       <ChildTweetMsg
         :currentTweet="currentTweet"
-        :text="currentTweet?.text?.replace('@shop__anywhere', '')?.trim()"
+        :text="
+          currentTweet?.text?.replace('@' + currUser?.username, '')?.trim()
+        "
         :time="moment(currentTweet?.created_at).format('h:mm')"
         :profile="currentTweet?.user?.profile_image_url"
       />
@@ -123,10 +125,16 @@ export default {
       }
     },
     replyToTweet(tweetMsg) {
+      const userData =
+        readCookie("userData") && JSON.parse(readCookie("userData"));
       const vm = this;
       const config = {
         method: "post",
         url: `${API_HOST}/api/v1/tweets/reply/${this.currentTweet?.id_str}`,
+        params: {
+          token: userData?.oauth_token,
+          tokenSecret: userData?.oauth_token_secret,
+        },
         data: {
           status: `@${this.currentTweet?.user?.screen_name} ${tweetMsg.replace(
             /[^a-zA-Z ]/g,

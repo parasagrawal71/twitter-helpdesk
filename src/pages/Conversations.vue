@@ -47,6 +47,7 @@ import ParentTweet from "../components/ParentTweet";
 import ChildTweets from "../components/ChildTweets";
 import Profile from "../components/Profile";
 import { API_HOST } from "../utils/constants";
+import { readCookie } from "../utils/cookie";
 
 export default {
   name: "Conversations",
@@ -59,6 +60,7 @@ export default {
   },
   components: { Sidebar, Header, SubHeader, ParentTweet, ChildTweets, Profile },
   mounted() {
+    console.log("userDAta", JSON.parse(readCookie("userData")));
     this.fetchMentions();
   },
   computed: {
@@ -82,9 +84,15 @@ export default {
       this.searchText = value;
     },
     fetchMentions() {
+      const userData =
+        readCookie("userData") && JSON.parse(readCookie("userData"));
       const config = {
         method: "get",
         url: `${API_HOST}/api/v1/tweets/mentions`,
+        params: {
+          token: userData?.oauth_token,
+          tokenSecret: userData?.oauth_token_secret,
+        },
       };
       return axios(config)
         .then((response) => {

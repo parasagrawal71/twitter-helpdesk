@@ -101,17 +101,7 @@ export default {
           //   "response",
           //   response && response.data && response.data.data
           // );
-          const { tokenData, currUser } = response?.data?.data;
-          const tempArr = tokenData && tokenData.split("&");
-          const dataArray = tempArr.map((item) => item && item.split("=")[1]);
-          const userData = {
-            oauth_token: dataArray[0],
-            oauth_token_secret: dataArray[1],
-            user_id: dataArray[2],
-            screen_name: dataArray[3],
-            currUser,
-          };
-          setCookie("userData", JSON.stringify(userData));
+          setCookie("userData", JSON.stringify(response?.data?.data));
           router.push({ name: "Conversations" });
         })
         .catch((error) => {

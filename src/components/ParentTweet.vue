@@ -20,15 +20,22 @@
       </div>
 
       <div class="tweetbox-msg">
-        {{ tweetData?.text.replace("@shop__anywhere", "") }}
+        {{ tweetData?.text.replace("@" + currUser?.username, "") }}
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import { readCookie } from "../utils/cookie";
+
 export default {
   name: "TweetBox",
+  data() {
+    return {
+      currUser: JSON.parse(readCookie("userData"))?.currUser,
+    };
+  },
   props: {
     tweetData: Object,
   },
