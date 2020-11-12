@@ -30,6 +30,7 @@
           <ChildTweets
             :currentTweet="currentTweet"
             :fetchMentions="fetchMentions"
+            :client="client"
           />
           <Profile :currentTweet="currentTweet" />
         </section>
@@ -39,6 +40,7 @@
 </template>
 
 <script>
+import { w3cwebsocket } from "websocket";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
@@ -49,6 +51,11 @@ import Profile from "../components/Profile";
 import { API_HOST } from "../utils/constants";
 import { readCookie } from "../utils/cookie";
 
+const userData = readCookie("userData") && JSON.parse(readCookie("userData"));
+const client = new w3cwebsocket(
+  `ws://127.0.0.1:8000?oauth_token=${userData?.oauth_token}&oauth_token_secret=${userData?.oauth_token_secret}&screen_name=${userData?.screen_name}`
+);
+
 export default {
   name: "Conversations",
   data() {
@@ -56,6 +63,7 @@ export default {
       mentions: [],
       currentTweet: [],
       searchText: "",
+      client: client,
     };
   },
   components: { Sidebar, Header, SubHeader, ParentTweet, ChildTweets, Profile },
