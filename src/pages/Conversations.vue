@@ -60,7 +60,10 @@ export default {
   },
   components: { Sidebar, Header, SubHeader, ParentTweet, ChildTweets, Profile },
   mounted() {
-    console.log("userDAta", JSON.parse(readCookie("userData")));
+    // console.log(
+    //   "userData",
+    //   readCookie("userData") && JSON.parse(readCookie("userData"))
+    // );
     this.fetchMentions();
   },
   computed: {

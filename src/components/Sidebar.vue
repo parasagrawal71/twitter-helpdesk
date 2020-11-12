@@ -57,7 +57,8 @@ export default {
   name: "Sidebar",
   data() {
     return {
-      currUser: JSON.parse(readCookie("userData"))?.currUser,
+      currUser:
+        readCookie("userData") && JSON.parse(readCookie("userData"))?.currUser,
     };
   },
 };

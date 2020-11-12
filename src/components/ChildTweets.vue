@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import { w3cwebsocket } from "websocket";
 import axios from "axios";
 import moment from "moment";
 import ChildTweetMsg from "./ChildTweetMsg";
@@ -80,11 +81,17 @@ import { readCookie } from "../utils/cookie";
 import { API_HOST } from "../utils/constants";
 import DefaultProfile from "./DefaultProfile";
 
+const userData = readCookie("userData") && JSON.parse(readCookie("userData"));
+const client = new w3cwebsocket(
+  `ws://127.0.0.1:8000?oauth_token=${userData?.oauth_token}&oauth_token_secret=${userData?.oauth_token_secret}&screen_name=${userData?.screen_name}`
+);
+
 export default {
   name: "ChildTweets",
   data() {
     return {
-      currUser: JSON.parse(readCookie("userData"))?.currUser,
+      currUser:
+        readCookie("userData") && JSON.parse(readCookie("userData"))?.currUser,
       message: "",
     };
   },
@@ -97,6 +104,14 @@ export default {
     showReplies() {
       return this.currentTweet?.replies;
     },
+  },
+  mounted() {
+    client.onopen = () => {
+      console.log("WebSocket Client Connected");
+    };
+    client.onmessage = (message) => {
+      console.log(message.data);
+    };
   },
   methods: {
     moment() {
