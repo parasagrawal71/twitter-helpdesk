@@ -52,9 +52,9 @@ import { API_HOST } from "../utils/constants";
 import { readCookie } from "../utils/cookie";
 
 const userData = readCookie("userData") && JSON.parse(readCookie("userData"));
-const ORIGIN = window.location.origin;
+// const ORIGIN = window.location.origin;
 const HOST = API_HOST?.includes("https")
-  ? ORIGIN.replace(/^https/, "ws")?.substr(0, ORIGIN.length - 1)
+  ? "ws://127.0.0.1:8000" // ORIGIN.replace(/^https/, "ws")?.substr(0, ORIGIN.length - 1)
   : "ws://127.0.0.1:8000";
 const client = new w3cwebsocket(
   `${HOST}?oauth_token=${userData?.oauth_token}&oauth_token_secret=${userData?.oauth_token_secret}&screen_name=${userData?.screen_name}`
