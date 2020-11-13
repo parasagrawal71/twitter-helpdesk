@@ -100,16 +100,6 @@ export default {
       return this.currentTweet?.replies;
     },
   },
-  mounted() {
-    // eslint-disable-next-line vue/no-mutating-props
-    this.client.onopen = () => {
-      console.log("WebSocket Client Connected");
-    };
-    // eslint-disable-next-line vue/no-mutating-props
-    this.client.onmessage = (message) => {
-      console.log(message.data);
-    };
-  },
   methods: {
     moment() {
       return moment();

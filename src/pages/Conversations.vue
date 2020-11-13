@@ -68,11 +68,22 @@ export default {
   },
   components: { Sidebar, Header, SubHeader, ParentTweet, ChildTweets, Profile },
   mounted() {
-    // console.log(
-    //   "userData",
-    //   readCookie("userData") && JSON.parse(readCookie("userData"))
-    // );
+    // console.log("userData", JSON.parse(readCookie("userData")));
     this.fetchMentions();
+    // eslint-disable-next-line vue/no-mutating-props
+    this.client.onopen = () => {
+      console.log("WebSocket Client Connected");
+    };
+    // eslint-disable-next-line vue/no-mutating-props
+    this.client.onmessage = (message) => {
+      let { data } = message;
+      const newTweet = JSON.parse(data)?.data;
+      // console.log("NEW TWEET", newTweet);
+      if (JSON.parse(data)?.type === "NEW_TWEET") {
+        this.mentions = [...this.mentions, newTweet];
+        this.currentTweet = newTweet;
+      }
+    };
   },
   computed: {
     activeMentions() {
