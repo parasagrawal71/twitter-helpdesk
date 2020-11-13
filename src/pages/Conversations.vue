@@ -52,14 +52,10 @@ import { API_HOST } from "../utils/constants";
 import { readCookie } from "../utils/cookie";
 
 const userData = readCookie("userData") && JSON.parse(readCookie("userData"));
-const ORIGIN = window.location.origin;
+// const ORIGIN = window.location.origin;
 const client = new w3cwebsocket(
-  `${ORIGIN.replace(/^http/, "ws")}?oauth_token=${
-    userData?.oauth_token
-  }&oauth_token_secret=${userData?.oauth_token_secret}&screen_name=${
-    userData?.screen_name
-  }`
-);
+  `ws://127.0.0.1:8000?oauth_token=${userData?.oauth_token}&oauth_token_secret=${userData?.oauth_token_secret}&screen_name=${userData?.screen_name}`
+); // ${ORIGIN.replace(/^http/, "ws")}
 
 export default {
   name: "Conversations",
