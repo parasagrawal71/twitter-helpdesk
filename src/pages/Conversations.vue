@@ -52,7 +52,7 @@ import { API_HOST } from "../utils/constants";
 import { readCookie } from "../utils/cookie";
 
 const userData = readCookie("userData") && JSON.parse(readCookie("userData"));
-// const ORIGIN = window.location.origin;
+const ORIGIN = window.location.origin;
 const HOST = API_HOST?.includes("https")
   ? ORIGIN.replace(/^https/, "wss")?.substr(0, ORIGIN.length - 1)
   : "ws://127.0.0.1:8000";
