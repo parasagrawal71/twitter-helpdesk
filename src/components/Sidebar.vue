@@ -41,6 +41,8 @@
           src="../assets/img/record.svg"
           alt="record-icon"
           id="record-icon"
+          title="Logout"
+          @click="clearSession"
         />
       </div>
       <div class="sidebar-profile">
@@ -51,7 +53,8 @@
 </template>
 
 <script>
-import { readCookie } from "../utils/cookie";
+import { readCookie, deleteCookie } from "../utils/cookie";
+import router from "../router";
 
 export default {
   name: "Sidebar",
@@ -60,6 +63,12 @@ export default {
       currUser:
         readCookie("userData") && JSON.parse(readCookie("userData"))?.currUser,
     };
+  },
+  methods: {
+    clearSession() {
+      deleteCookie("userData");
+      router.push("/");
+    },
   },
 };
 </script>
@@ -121,6 +130,7 @@ export default {
 }
 .sidebar-bottom-icon {
   padding: 15px 0;
+  cursor: pointer;
 }
 .sidebar-profile {
   padding: 15px 0 35px 0;
