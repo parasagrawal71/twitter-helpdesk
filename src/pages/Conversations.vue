@@ -83,11 +83,11 @@ export default {
     };
 
     this.client.onerror = (error) => {
-      console.log("Connect Error: " + error.toString());
+      console.log("Connect Error: " + error);
     };
 
-    this.client.onclose = (error) => {
-      console.log("Connection closed: " + error.toString());
+    this.client.onclose = (msg) => {
+      console.log("Connection closed: " + msg);
     };
 
     // eslint-disable-next-line vue/no-mutating-props
