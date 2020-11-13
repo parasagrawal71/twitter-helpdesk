@@ -39,10 +39,18 @@
         :key="item"
         :currentTweet="currentTweet"
         :text="
-          item?.text?.replace(`@${currentTweet?.user?.screen_name}`, '')?.trim()
+          item?.text?.includes(currentTweet?.user?.screen_name)
+            ? item?.text
+                ?.replace(`@${currentTweet?.user?.screen_name}`, '')
+                ?.trim()
+            : item?.text?.replace(`@${currUser?.username}`, '')?.trim()
         "
         :time="moment(currentTweet?.created_at).format('h:mm')"
-        :profile="currUser?.profile_image_url"
+        :profile="
+          item?.text?.includes(currentTweet?.user?.screen_name)
+            ? currUser?.profile_image_url
+            : currentTweet?.user?.profile_image_url
+        "
       />
     </section>
     <div class="childtweets-body-reply">

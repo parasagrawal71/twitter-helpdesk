@@ -78,10 +78,18 @@ export default {
     this.client.onmessage = (message) => {
       let { data } = message;
       const newTweet = JSON.parse(data)?.data;
-      // console.log("NEW TWEET", newTweet);
+      console.log("NEW TWEET", newTweet);
       if (JSON.parse(data)?.type === "NEW_TWEET") {
-        this.mentions = [...this.mentions, newTweet];
-        this.currentTweet = newTweet;
+        if (!newTweet?.in_reply_to_status_id_str) {
+          this.mentions = [...this.mentions, newTweet];
+          this.currentTweet = newTweet;
+        } else {
+          this.mentions.map((item) => {
+            if (item?.id_str === newTweet?.in_reply_to_status_id_str) {
+              item?.replies.push(newTweet);
+            }
+          });
+        }
       }
     };
   },
@@ -105,6 +113,28 @@ export default {
     setSearchText(value) {
       this.searchText = value;
     },
+    flatten(repliesArr) {
+      const flattedArr = [];
+      repliesArr.map((repliesObj) => {
+        let flatted = { ...repliesObj };
+        if (Object.keys(flatted).length) {
+          flattedArr.push(flatted);
+        }
+        delete flatted.replies;
+        while ("replies" in repliesObj) {
+          const newflatObj = { ...repliesObj.replies[0] };
+          delete newflatObj.replies;
+          if (Object.keys(newflatObj).length) {
+            flattedArr.push(newflatObj);
+          }
+          repliesObj = repliesObj.replies[0];
+          if (repliesObj === undefined) {
+            break;
+          }
+        }
+      });
+      return flattedArr;
+    },
     fetchMentions() {
       const userData =
         readCookie("userData") && JSON.parse(readCookie("userData"));
@@ -120,8 +150,14 @@ export default {
         .then((response) => {
           const { data } = response && response.data;
           // console.log("data", data);
-          this.mentions = data;
-          this.currentTweet = data[0];
+          const updatedData = data?.map((item) => {
+            const updatedReplies = this.flatten(item?.replies);
+            item.replies = updatedReplies;
+            return item;
+          });
+          // console.log("updatedData", updatedData);
+          this.mentions = updatedData;
+          this.currentTweet = updatedData[0];
         })
         .catch((error) => {
           // console.log("Error: ", error);
