@@ -66,10 +66,15 @@ export default {
     const userData =
       readCookie("userData") && JSON.parse(readCookie("userData"));
     // console.log("userData", userData);
-    // const ORIGIN = window.location.origin;
+
+    const ORIGIN = window.location.origin;
     this.client = new w3cwebsocket(
-      `ws://127.0.0.1:8000?oauth_token=${userData?.oauth_token}&oauth_token_secret=${userData?.oauth_token_secret}&screen_name=${userData?.screen_name}`
-    ); // ${ORIGIN.replace(/^http/, "ws")}
+      `${ORIGIN.replace(/^http/, "ws")}?oauth_token=${
+        userData?.oauth_token
+      }&oauth_token_secret=${userData?.oauth_token_secret}&screen_name=${
+        userData?.screen_name
+      }`
+    ); // ${ORIGIN.replace(/^http/, "ws")} // ws://127.0.0.1:8000
 
     this.fetchMentions();
     // eslint-disable-next-line vue/no-mutating-props
