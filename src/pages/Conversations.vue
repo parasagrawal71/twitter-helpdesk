@@ -81,14 +81,37 @@ export default {
       console.log("NEW TWEET", newTweet);
       if (JSON.parse(data)?.type === "NEW_TWEET") {
         if (!newTweet?.in_reply_to_status_id_str) {
-          this.mentions = [...this.mentions, newTweet];
+          this.mentions.unshift(newTweet);
+          this.mentions = [...this.mentions];
           this.currentTweet = newTweet;
         } else {
-          this.mentions.map((item) => {
-            if (item?.id_str === newTweet?.in_reply_to_status_id_str) {
-              item?.replies.push(newTweet);
-            }
-          });
+          // eslint-disable-next-line vue/no-mutating-props
+          if (!this.currentTweet?.replies) {
+            this.currentTweet.replies = [
+              {
+                text: `${newTweet?.text}`,
+                referenced_tweets: [
+                  {
+                    type: "replied_to",
+                    id: this.currentTweet?.id_str,
+                  },
+                ],
+              },
+            ];
+            return;
+          }
+          this.currentTweet.replies = [
+            ...this.currentTweet?.replies,
+            {
+              text: `${newTweet?.text}`,
+              referenced_tweets: [
+                {
+                  type: "replied_to",
+                  id: this.currentTweet?.id_str,
+                },
+              ],
+            },
+          ];
         }
       }
     };

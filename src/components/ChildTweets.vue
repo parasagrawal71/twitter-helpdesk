@@ -157,18 +157,27 @@ export default {
         .then((response) => {
           const { data } = response && response.data;
           console.log("response", data);
-          vm.message = "";
           if (!vm.currentTweet?.replies) {
+            // eslint-disable-next-line vue/no-mutating-props
+            vm.currentTweet.replies = [
+              {
+                text: `${data?.text}`,
+                referenced_tweets: [
+                  {
+                    type: "replied_to",
+                    id: vm.currentTweet?.id_str,
+                  },
+                ],
+              },
+            ];
+            vm.message = "";
             return;
           }
           // eslint-disable-next-line vue/no-mutating-props
           vm.currentTweet.replies = [
             ...vm.currentTweet?.replies,
             {
-              text: `@${vm.currentTweet?.user?.screen_name} ${tweetMsg.replace(
-                /[^a-zA-Z ]/g,
-                ""
-              )}`,
+              text: `${data?.text}}`,
               referenced_tweets: [
                 {
                   type: "replied_to",
@@ -177,6 +186,7 @@ export default {
               ],
             },
           ];
+          vm.message = "";
         })
         .catch((error) => {
           // console.log("Error: ", error);
