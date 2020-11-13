@@ -68,13 +68,12 @@ export default {
     // console.log("userData", userData);
 
     const ORIGIN = window.location.origin;
+    const HOST = ORIGIN?.includes("https")
+      ? "wss://twitter-helpdesk--server.herokuapp.com/"
+      : "ws://127.0.0.1:8000";
     this.client = new w3cwebsocket(
-      `${ORIGIN.replace(/^https/, "ws")}?oauth_token=${
-        userData?.oauth_token
-      }&oauth_token_secret=${userData?.oauth_token_secret}&screen_name=${
-        userData?.screen_name
-      }`
-    ); // ${ORIGIN.replace(/^http/, "ws")} // ws://127.0.0.1:8000
+      `${HOST}?oauth_token=${userData?.oauth_token}&oauth_token_secret=${userData?.oauth_token_secret}&screen_name=${userData?.screen_name}`
+    );
 
     this.fetchMentions();
     // eslint-disable-next-line vue/no-mutating-props
