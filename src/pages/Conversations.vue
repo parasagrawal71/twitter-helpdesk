@@ -69,7 +69,7 @@ export default {
 
     const ORIGIN = window.location.origin;
     this.client = new w3cwebsocket(
-      `${ORIGIN.replace(/^http/, "ws")}?oauth_token=${
+      `${ORIGIN.replace(/^https/, "ws")}?oauth_token=${
         userData?.oauth_token
       }&oauth_token_secret=${userData?.oauth_token_secret}&screen_name=${
         userData?.screen_name
