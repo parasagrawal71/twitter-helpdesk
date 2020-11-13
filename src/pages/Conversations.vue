@@ -69,7 +69,7 @@ export default {
 
     const ORIGIN = window.location.origin;
     const HOST = ORIGIN?.includes("https")
-      ? "wss://twitter-helpdesk--server.herokuapp.com/"
+      ? "ws://twitter-helpdesk--server.herokuapp.com/"
       : "ws://127.0.0.1:8000";
     this.client = new w3cwebsocket(
       `${HOST}?oauth_token=${userData?.oauth_token}&oauth_token_secret=${userData?.oauth_token_secret}&screen_name=${userData?.screen_name}`
