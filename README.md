@@ -16,10 +16,11 @@ An application to show all the tweets in which you have been mentioned, in one p
 
 
 
-##### Languages and Concepts used in this project:-
+##### Languages, Frameworks and Concepts used in this project:-
 
 - Vue JS
 - JavaScript, HTML and CSS/SCSS
 - Node JS for Backend (Check out twitter-helpdesk-server repo)
 - Websocket
 - Twitter OAuth Login and Twitter APIs
+- Deployed on Heroku (CI/CD)
