@@ -1,24 +1,16 @@
-# twitter-helpdesk
+# Twitter Helpdesk
 
-## Project setup
-```
-yarn install
-```
+An application to show all the tweets in which you have been mentioned, in one place and with better UI experience. You can use your twitter account to login without entering your password in this app (OAuth login). You will be seeing any mention or reply in real-time without refreshing the page. Also, you can reply to the tweet in this app which will be reflected to the original tweet in the twitter.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
 
-### Compiles and minifies for production
-```
-yarn build
-```
 
-### Lints and fixes files
-```
-yarn lint
-```
+##### Video Link where you can check how this application works:-
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[Click here to watch the video](https://drive.google.com/file/d/10yPXMO4IyYN8l1xC6_fzNEaGxLOrtCc_/view?usp=sharing)
+
+
+
+##### Twitter Helpdesk Website:-
+
+[Click here to check out the website](https://twitter--helpdesk.herokuapp.com/)
+
