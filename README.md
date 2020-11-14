@@ -22,3 +22,4 @@ An application to show all the tweets in which you have been mentioned, in one p
 - JavaScript, HTML and CSS/SCSS
 - Node JS for Backend (Check out twitter-helpdesk-server repo)
 - Websocket
+- Twitter OAuth Login and Twitter APIs
