@@ -14,3 +14,11 @@ An application to show all the tweets in which you have been mentioned, in one p
 
 [Click here to check out the website](https://twitter--helpdesk.herokuapp.com/)
 
+
+
+##### Languages and Concepts used in this project:-
+
+- Vue JS
+- JavaScript, HTML and CSS/SCSS
+- Node JS for Backend (Check out twitter-helpdesk-server repo)
+- Websocket
