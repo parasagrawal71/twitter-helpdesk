@@ -1,6 +1,6 @@
 # Twitter Helpdesk
 
-An application to show all the tweets in which you have been mentioned, in one place and with better UI experience. You can use your twitter account to login without entering your password in this app (OAuth login). You will be seeing any mention or reply in real-time without refreshing the page. Also, you can reply to the tweet in this app which will be reflected to the original tweet in the twitter.
+An application to show all the tweets in which you have been mentioned, in one place and with a better UI experience. You can use your Twitter account to login without entering your password in this app (OAuth login). You will be seeing any mention or reply in real-time without refreshing the page. Also, you can reply to the tweet in this app which will be reflected in the original tweet on Twitter.
 
 
 
