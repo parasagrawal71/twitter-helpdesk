@@ -15,12 +15,16 @@ An application to show all the tweets in which you have been mentioned, in one p
 [Click here to check out the website](https://twitter--helpdesk.herokuapp.com/)
 
 
+#### Backend repositories:-
+[API Server](https://github.com/parasagrawal71/twitter-helpdesk-server)
+[Socket Server](https://github.com/parasagrawal71/twitter-socket-server)
+
 
 ##### Languages, Frameworks and Concepts used in this project:-
 
 - Vue JS
 - JavaScript, HTML and CSS/SCSS
-- Node JS for Backend (Check out twitter-helpdesk-server repo)
+- Node JS for Backend (Check out twitter-helpdesk-server and twitter-socket-server repositories)
 - Websocket
 - Twitter OAuth Login and Twitter APIs
 - Deployed on Heroku (CI/CD)
