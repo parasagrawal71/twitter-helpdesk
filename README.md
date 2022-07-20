@@ -68,9 +68,9 @@ An application to show all the tweets in which you have been mentioned, in one p
 - [![Node.js][node-icon]][icon-url]
 - [![Express][express-icon]][icon-url]
 - [![JavaScript][javascript-icon]][icon-url]
-- [![Twit][twit-icon]][twit-url] - Twitter API Client for **Streaming** API
+- [![Twit][twit-icon]][icon-url] - Twitter API Client for **Streaming** API
 - [![Websocket][websocket-icon]][icon-url]
-- [![Twitter APIs][twitter-apis-icon]][icon-url]- OAuth and APIs to get twitter mentions and replies
+- [![Twitter APIs][twitter-apis-icon]][icon-url] - OAuth and APIs to get twitter mentions and replies
 
 #### Database & ODM
 
