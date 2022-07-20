@@ -53,7 +53,7 @@ An application to show all the tweets in which you have been mentioned, in one p
 ### Features
 
 - OAuth login using twitter handle
-- See the list of user's mentions and replies to them
+- View the list of user mentions and replies to them
 - Mentions and replies are updated in real-time
 - Reply to mentions or replies
 
