@@ -12,14 +12,11 @@
   <!-- <a href=""><strong>Explore the docs »</strong></a>
   <br />
   <br /> -->
-  <a href="https://twitter--helpdesk.herokuapp.com">Visit website</a>
+  <a href="https://twitter-helpdesk-app.web.app">Visit website</a>
   ·
   <a href="https://drive.google.com/file/d/10yPXMO4IyYN8l1xC6_fzNEaGxLOrtCc_/view">Watch Video</a>
   </p>
 </div>
-
-
-
 
 <!-- TABLE OF CONTENTS -->
 
@@ -37,16 +34,11 @@
   <br />
 </details>
 
-
-
-
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
 
 [![Twitter helpdesk][product-gif]][website-link]
-
-
 
 An application to show all the tweets in which you have been mentioned, in one place and with a better UI experience. You can use your Twitter account to login without entering your password in this app (OAuth login). You will be seeing any mention or reply in real-time without refreshing the page. Also, you can reply to the tweet in this app which will be reflected in the original tweet on Twitter.
 
@@ -58,8 +50,6 @@ An application to show all the tweets in which you have been mentioned, in one p
 - Reply to mentions or replies
 
 <p align="right">(<a href="#top">Back to top</a>)</p>
-
-
 
 ### Built With
 
@@ -79,29 +69,22 @@ An application to show all the tweets in which you have been mentioned, in one p
 
 #### Client
 
-* [![Vue][vue-icon]][icon-url]
-* [![HTML5][html5-icon]][icon-url]
-* [![CSS3][css3-icon]][icon-url]
-* [![SASS][sass-icon]][icon-url]
+- [![Vue][vue-icon]][icon-url]
+- [![HTML5][html5-icon]][icon-url]
+- [![CSS3][css3-icon]][icon-url]
+- [![SASS][sass-icon]][icon-url]
 
 #### DevOps
 
-* [![Heroku][heroku-icon]][icon-url] (Client and Servers) - CI/CD
-
+- [![Heroku][heroku-icon]][icon-url] (Client and Servers) - CI/CD
 
 <p align="right">(<a href="#top">Back to top</a>)</p>
-
-
-
-
-
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
 <!-- PROJECT SPECIFIC LINKS -->
 
-[website-link]: https://twitter--helpdesk.herokuapp.com
+[website-link]: https://twitter-helpdesk-app.web.app
 [product-screenshot]: src/assets/img/product-screenshot.png
 [product-gif]: src/assets/gifs/product-gif.gif
 
@@ -124,8 +107,6 @@ An application to show all the tweets in which you have been mentioned, in one p
 [twit-icon]: https://img.shields.io/badge/Twit-20232A?style=for-the-badge
 [websocket-icon]: https://img.shields.io/badge/websocket-20232A?style=for-the-badge
 [twitter-apis-icon]: https://img.shields.io/badge/Twitter%20APIs-20232A?style=for-the-badge&logo=Twitter&logoColor=1DA1F2
-
-
 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
