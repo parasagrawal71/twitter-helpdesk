@@ -76,7 +76,8 @@ An application to show all the tweets in which you have been mentioned, in one p
 
 #### DevOps
 
-- [![Heroku][heroku-icon]][icon-url] (Client and Servers) - CI/CD
+- [![Firebase][firebase-icon]][icon-url] (Client)
+- [![Heroku][heroku-icon]][icon-url] (Server) - CI/CD
 
 <p align="right">(<a href="#top">Back to top</a>)</p>
 
