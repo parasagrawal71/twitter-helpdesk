@@ -50,6 +50,10 @@ import ChildTweets from "../components/ChildTweets";
 import Profile from "../components/Profile";
 import { API_HOST } from "../utils/constants";
 import { readCookie } from "../utils/cookie";
+import {
+  WS_SERVER_HOST_URL_PROD,
+  WS_SERVER_HOST_URL_DEV,
+} from "../config/config";
 
 export default {
   name: "Conversations",
@@ -69,10 +73,10 @@ export default {
 
     const ORIGIN = window.location.origin;
     const HOST = ORIGIN?.includes("https")
-      ? "wss://twitter-socket-server.onrender.com/"
-      : "ws://127.0.0.1:6002";
+      ? WS_SERVER_HOST_URL_PROD
+      : WS_SERVER_HOST_URL_DEV;
     this.client = new w3cwebsocket(
-      `${HOST}?oauth_token=${userData?.oauth_token}&oauth_token_secret=${userData?.oauth_token_secret}&screen_name=${userData?.screen_name}`
+      `${HOST}?oauth_token=${userData?.oauth_token}&oauth_token_secret=${userData?.oauth_token_secret}&screen_name=${userData?.screen_name}`,
     );
 
     this.fetchMentions();
@@ -136,14 +140,14 @@ export default {
       return this.mentions.filter(
         (item) =>
           new Date(item.created_at) >
-          new Date(new Date().getTime() - 48 * 60 * 60000)
+          new Date(new Date().getTime() - 48 * 60 * 60000),
       );
     },
     expiredMentions() {
       return this.mentions.filter(
         (item) =>
           new Date(item.created_at) <=
-          new Date(new Date().getTime() - 48 * 60 * 60000)
+          new Date(new Date().getTime() - 48 * 60 * 60000),
       );
     },
   },
