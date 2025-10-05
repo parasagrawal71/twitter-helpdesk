@@ -125,7 +125,7 @@ export default {
         return "Yesterday";
       } else {
         return moment(new Date(this.currentTweet?.created_at)).format(
-          "DD MMM, YYYY"
+          "DD MMM, YYYY",
         );
       }
     },
@@ -148,7 +148,7 @@ export default {
         data: {
           status: `@${this.currentTweet?.user?.screen_name} ${tweetMsg.replace(
             /[^a-zA-Z ]/g,
-            ""
+            "",
           )}`,
           // username: "@" + this.currentTweet?.user?.screen_name,
         },

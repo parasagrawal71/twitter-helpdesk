@@ -44,7 +44,7 @@
       </div>
       <div class="profile-details-row">
         <div>Username</div>
-        <div>{{ "@" + currentTweet?.user?.screen_name }}</div>
+        <div>{{ "@" + userData?.username }}</div>
       </div>
     </section>
 
@@ -55,12 +55,19 @@
 <script>
 import Tasks from "./Tasks";
 import DefaultProfile from "./DefaultProfile";
+import { readCookie } from "../utils/cookie";
 
 export default {
   name: "Profile",
   components: { Tasks, DefaultProfile },
   props: {
     currentTweet: Object,
+  },
+  data() {
+    return {
+      userData:
+        readCookie("userData") && JSON.parse(readCookie("userData"))?.currUser,
+    };
   },
 };
 </script>
