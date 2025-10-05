@@ -44,7 +44,13 @@
       </div>
       <div class="profile-details-row">
         <div>Username</div>
-        <div>{{ "@" + currentTweet?.user?.screen_name }}</div>
+        <div>
+          {{
+            currentTweet?.user?.screen_name
+              ? "@" + currentTweet?.user?.screen_name
+              : ""
+          }}
+        </div>
       </div>
     </section>
 
